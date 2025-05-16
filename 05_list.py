@@ -1,7 +1,7 @@
 # Day 5: 30 Days of python programming
 
 ## Exercises: Level 1
-"""
+
 # 1.Declare an empty list
 #lst = []
 lst = list()
@@ -229,7 +229,7 @@ print(full_stack)
 ['HTML', 'CSS', 'JS', 'React', 'Redux', 'Node', 'Express', 'MongoDB', 'Node', 'Express', 'MongoDB', 'Python', 'SQL']
 ##########################################################
 '''
-"""
+
 ## Exercises: Level 2
 
 # 1. The following is a list of 10 students ages, do as follows:
