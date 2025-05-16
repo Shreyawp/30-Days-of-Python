@@ -274,14 +274,22 @@ with open("countries.py", 'r') as country_file:
     exec(country_file.read(), read_file)
 
 country_list = read_file.get('countries')
-print("Middle Country: ", country_list[middle_index])
+mid = int((len(country_list)-1)/2)
+print("Middle Country: ", country_list[mid])
 ''' 
 ####################### OUTPUT ##########################
 Middle Country:  Antigua and Barbuda
 ##########################################################
 '''
 # 3. Divide the countries list into two equal lists if it is even if not one more country for the first half.
-print(len(country_list))
+country1 = country_list[:mid+1]
+country2 = country_list[mid+1:]
+print(len(country1), len(country2))
+''' 
+####################### OUTPUT ##########################
+97 96
+##########################################################
+'''
 # 4. ['China', 'Russia', 'USA', 'Finland', 'Sweden', 'Norway', 'Denmark']. Unpack the first three countries and the rest as scandic countries.
 China, Russia, USA, *Scandic_countries = ['China', 'Russia', 'USA', 'Finland', 'Sweden', 'Norway', 'Denmark']
 print(China, Russia, USA, Scandic_countries)
