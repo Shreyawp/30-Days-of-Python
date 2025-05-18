@@ -100,8 +100,8 @@ Is list of age more than set True
 """
 String are characters quoted with single or double quotes.
 List is collection of different data type objects. It is mutable. enclosed in []
-tuple is same as list containing order items but are immutable enclosed in ()
-set is collection of unique/distinct unordered items enclosed in {}
+Tuple is same as list containing order items but are immutable enclosed in ()
+Set is collection of unique/distinct unordered items enclosed in {}
 """
 # 3.  How many unique words have been used in the sentence? 
 # Use the split methods and set to get the unique words.
