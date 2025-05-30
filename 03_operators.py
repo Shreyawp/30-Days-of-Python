@@ -48,10 +48,10 @@ Perimeter of triangle =  16
 '''
 # 6. area and perimeter of rectangle
 print("Calculate area and perimeter of rectangle")
-len = int(input("Enter length: "))
-wid = int(input("ENter Width: "))
-print("Area of rectangle: ", len*wid,
-      "\nPerimeter of rectangle: ", 2*(len+wid))
+length = int(input("Enter length: "))
+width = int(input("ENter Width: "))
+print("Area of rectangle: ", length*width,
+      "\nPerimeter of rectangle: ", 2*(length+width))
 print("#" * 50)
 ''' 
 ####################### OUTPUT ##########################
@@ -175,13 +175,13 @@ jargon is in given sentence
 '''
 # 15. There is no 'on' in both dragon and python
 if 'on' not in ('dragon','python'):
-    print(True)
-else:
     print(False)
+else:
+    print(True)
 print("#" * 50)
 ''' 
 ####################### OUTPUT ##########################
-True
+False
 ##################################################
 '''
 # 16. Find the length of the text python 
@@ -244,6 +244,7 @@ print("#" * 50)
 ''' 
 ####################### OUTPUT ##########################
 ValueError: invalid literal for int() with base 10: '9.8'
+##################################################
 '''
 # 21. Write a script that prompts the user to enter hours and rate per hour. 
 # Calculate pay of the person?
