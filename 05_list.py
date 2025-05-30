@@ -278,7 +278,7 @@ mid = int((len(country_list)-1)/2)
 print("Middle Country: ", country_list[mid])
 ''' 
 ####################### OUTPUT ##########################
-Middle Country:  Antigua and Barbuda
+Middle Country:  Lesotho
 ##########################################################
 '''
 # 3. Divide the countries list into two equal lists if it is even if not one more country for the first half.
