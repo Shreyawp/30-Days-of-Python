@@ -28,7 +28,7 @@ my_age = 27
 your_age = int(input("Enter your age: "))
 year = abs(my_age - your_age)
 if year == 1:
-    print(f"You are {year} younger than me.")
+    print(f"You are a younger than me.")
 elif year > 0:
     print(f'You are {year} older than me.')
 else: 
@@ -36,7 +36,7 @@ else:
 ''' 
 ####################### OUTPUT ##########################
 Enter your age: 26
-You are 1 younger than me.
+You are a younger than me.
 
 Enter your age: 30
 You are 3 older than me.
@@ -214,6 +214,6 @@ if person['is_marred'] == True:
         print(f"{person['first_name']} {person['last_name']} lives in {person['country']}. He is married.")
 ''' 
 ####################### OUTPUT ##########################
-Asabeneh Yetayeh lives in Finland.He is married.
+Asabeneh Yetayeh lives in Finland. He is married.
 ##########################################################
 '''

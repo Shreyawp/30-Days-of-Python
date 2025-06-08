@@ -4,7 +4,6 @@
 
 it_companies = {'Facebook', 'Google', 'Microsoft', 'Apple', 'IBM', 'Oracle', 'Amazon'}
 
-"""
 # 1. Find the length of the set it_companies
 print("Length of it_companies set: ", len(it_companies))
 ''' 
@@ -33,7 +32,7 @@ Added multiple companies using update():  {'Huawei', 'Apple', 'Amazon', 'Oracle'
 '''
 # 4. Remove one of the companies from the set it_companies
 it_companies.remove('LG')
-#This will not throw an error second time
+#This will throw an error second time
 #it_companies.remove('LG')   # KeyError: 'LG'
 print("Removed company using remove(): ", it_companies)
 ''' 
@@ -57,43 +56,44 @@ A = {19, 22, 24, 20, 25, 26}
 B = {19, 22, 20, 25, 26, 24, 28, 27}
 
 # 1. Join A and B
-A.union(B)
+print("Join A and B using union(): ",A.union(B))
 # 2. Find A intersection B
-print(A.intersection(B))
+print("A intersection B: ",A.intersection(B))
 # 3. Is A subset of B
-print(A.issubset(B))
+print("Is A subset of B: ",A.issubset(B))
 # 4. Are A and B disjoint sets
-print(A.isdisjoint(B))
+print("Are A and B disjoint sets: ",A.isdisjoint(B))
 # 5. Join A with B and B with A
 print("Join A with B: ", A.union(B), 
       "\nJoin B with A: ", B.union(A))
 # 6. What is the symmetric difference between A and B
-print(A.symmetric_difference(B))
+print("symmetric difference between A and B: ",A.symmetric_difference(B))
 # 7. Delete the sets completely
 del A, B
-print(A, B)
+#print(A, B)
 ''' 
 ####################### OUTPUT ##########################
-{19, 20, 22, 24, 25, 26}
-True
-False
+Join A and B using union():  {19, 20, 22, 24, 25, 26, 27, 28}
+A intersection B:  {19, 20, 22, 24, 25, 26}
+Is A subset of B:  True
+Are A and B disjoint sets:  False
 Join A with B:  {19, 20, 22, 24, 25, 26, 27, 28}
 Join B with A:  {19, 20, 22, 24, 25, 26, 27, 28}
-{27, 28}
+symmetric difference between A and B:  {27, 28}
 print(A, B) >> NameError: name 'A' is not defined
 ##########################################################
 '''
-"""
+
 ## Exercises: Level 3
 
 age = [22, 19, 24, 25, 26, 24, 25, 24]
 
 # 1. Convert the ages to a set and compare the length of the list and the set, which one is bigger?
 age_set = set(age)
-print("Is list of age more than set" , len(age) > len(age_set))
+print("Is list of age more than set: " , len(age) > len(age_set))
 ''' 
 ####################### OUTPUT ##########################
-Is list of age more than set True
+Is list of age more than set: True
 ##########################################################
 '''
 # 2. Explain the difference between the following data types: string, list, tuple and set
@@ -108,8 +108,10 @@ Set is collection of unique/distinct unordered items enclosed in {}
 string = 'I am a teacher and I love to inspire and teach people.'
 str_set = set(string.split())
 print("Set of unique words in given string: ", len(str_set))
+print(str_set)
 ''' 
 ####################### OUTPUT ##########################
 Set of unique words in given string:  10
+{'and', 'teach', 'a', 'I', 'people.', 'to', 'love', 'teacher', 'am', 'inspire'}
 ##########################################################
 '''
