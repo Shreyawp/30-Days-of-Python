@@ -1,7 +1,7 @@
 # Day 11: 30 Days of python programming
 
 ## Exercises: Level 1
-"""
+
 # 1. Declare a function add_two_numbers. 
 # It takes two parameters and it returns a sum.
 def add_two_numbers(a,b):
@@ -115,19 +115,21 @@ grapes
 # and it returns the reverse of the array (use loops).
 def reverse_list(lst):
     rev_lst = []
-    for l in lst:
-        for i in range(len(lst),0,-1):
-            print(l,i)
-            rev_lst.insert(i,l)
+    for l in lst[::-1]:
+        rev_lst.append(l)
     return rev_lst
 
 print(reverse_list([1, 2, 3, 4, 5]))
-#print(reverse_list(["A", "B", "C"]))
+print(reverse_list(["A", "B", "C"]))
+print(reverse_list([1,'a',50,'am','100', 100]))
 ''' 
 ####################### OUTPUT ##########################
-
+[5, 4, 3, 2, 1]
+['C', 'B', 'A']
+[100, '100', 'am', 50, 'a', 1]
 ##########################################################
 '''
+
 # 10. Declare a function named capitalize_list_items. 
 # It takes a list as a parameter and it returns a capitalized list of items
 def capitalize_list_items(str_lst):
@@ -336,28 +338,38 @@ Variance:  34.640625
 Standard Deviation:  5.885628683496777
 ##########################################################
 '''
-"""
+
 ## Exercise Level 3
 
 # 1. Write a function called is_prime, which checks if a number is prime.
 def is_prime(num):
-    if num != 0:
-        if num == 1:
-            print("Number is NOT Prime !")
-        elif num > 1:
-            for i in range(1,num):
-                if num%i == 1:
-                    print("Number is Prime !")
-                else: 
-                    print("Number is NOT Prime !")
+    if num == 0 or num == 1:
+        return False
+    elif num == 2:
+        return True
+    elif num%2 == 0:
+        return False
+    else: 
+        for i in range(3,num,2):
+            if num%i == 0:
+                return False
+        return True
             
-is_prime(3) 
+print(is_prime(3))
+print(is_prime(5))
+print(is_prime(2))
+print(is_prime(33))
+print(is_prime(1))
 ''' 
 ####################### OUTPUT ##########################
-
+True
+True
+True
+False
+False
 ##########################################################
 '''
-"""
+
 # 2. Write a functions which checks if all items are unique in the list.
 def check_list(lst):
     if lst == list(set(lst)):
@@ -501,4 +513,3 @@ Turkey : 78741053
 France : 66710000
 ##########################################################
 '''
-"""
