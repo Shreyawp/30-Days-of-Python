@@ -138,4 +138,4 @@ slope = lambda x,y: y/x
 print(slope(2,6))
 # >> 3.0
 
-
+# y_intercept
