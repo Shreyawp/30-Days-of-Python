@@ -294,7 +294,7 @@ print(list(upper_case_names))
 
 # 4. Use filter to filter out countries containing 'land'.
 def filter_land(country):
-    if 'land' in country:
+    if country.endswith('land'):
         return True
     return False
 
@@ -325,7 +325,7 @@ print(list(long_char_countries))
 
 # 7. Use filter to filter out countries starting with an 'E'
 def if_start_with_E(chars):
-    if chars[0] == 'E':
+    if chars.startswith('E'):
         return True
     return False
 
@@ -335,19 +335,35 @@ print(list(country_start_with_E))
 
 # 8. Chain two or more list iterators 
 # (eg. arr.map(callback).filter(callback).reduce(callback))
-#arr.map(upper_case, countries).filter(if_start_with_E, countries)
+result = reduce(lambda acc,x : acc + x,
+                filter(lambda x:x%2==0,
+                       map(lambda x:x**2,numbers)
+                       )
+                )
+
+print("Sum of even squares: ", result)
+# >> Sum of even squares:  220
+
+result = reduce(lambda acc,x: acc+', '+x,
+                filter(lambda x:x.endswith('LAND'),
+                       map(lambda x:x.upper(),countries)
+                       )
+                )
+
+print("Countries end with 'LAND': ", result)
+# >> Countries end with 'LAND':  FINLAND, ICELAND
 
 # 9. Declare a function called get_string_lists which takes a list 
 # as a parameter and then returns a list containing only string items.
-
+list1 = ['Asabeneh', 123, True, 'Python', 3.14, 'Hello']
 def get_string_lists(list):
-    for l in list:
-        if l == str(l):
-            return True
+    if isinstance(list,str): 
+        return True
     return False
 
-is_countries_str = filter(get_string_lists, countries)
-#print(list(is_countries_str))
+is_list_str = filter(get_string_lists, list1)
+print(list(is_list_str))
+# >> ['Asabeneh', 'Python', 'Hello']
 
 # 10. Use reduce to sum all the numbers in the numbers list.
 sum_all_num = reduce(add_nums, numbers)
