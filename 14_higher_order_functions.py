@@ -1,5 +1,5 @@
 # Day 14: Higher order functions
-
+"""
 # Functions as parameter
 def sum_nums(nums):
     return sum(nums)
@@ -378,6 +378,134 @@ def concat_countries(c1, c2):
 country_con = reduce(concat_countries, countries)
 print(country_con + " are north European countries.")
 # >> Estonia, Finland, Sweden, Denmark, Norway, Iceland are north European countries.
+"""
+# 12. Declare a function called categorize_countries that returns 
+# a list of countries with some common pattern 
+# (eg 'land', 'ia', 'island', 'stan')).
+read_file = {}
+with open('countries.py','r') as country_file:
+    exec(country_file.read(), read_file)
+
+country_list = read_file.get('countries')
+
+def categorize_countries(country):
+    if country.endswith(('land', 'ia', 'island', 'stan')):
+        return True
+    return False
+
+country_category = filter(categorize_countries, country_list)
+#print(list(country_category))
+''' 
+####################### OUTPUT ##########################
+['Afghanistan', 'Albania', 'Algeria', 'Armenia', 'Australia', 'Austria', 
+'Bolivia', 'Bulgaria', 'Cambodia', 'Croatia', 'Estonia', 'Ethiopia', 'Finland',
+'Georgia', 'Iceland', 'India', 'Indonesia', 'Ireland', 'Kazakhstan', 
+'Kyrgyzstan', 'Latvia', 'Liberia', 'Lithuania', 'Macedonia', 'Malaysia', 
+'Mauritania', 'Micronesia', 'Mongolia', 'Namibia', 'New Zealand', 'Nigeria', 
+'Pakistan', 'Poland', 'Romania', 'Russia', 'Saint Lucia', 'Saudi Arabia', 
+'Slovakia', 'Slovenia', 'Somalia', 'Swaziland', 'Switzerland', 'Syria', 
+'Tajikistan', 'Tanzania', 'Thailand', 'Tunisia', 'Turkmenistan', 'Uzbekistan',
+'Zambia']
+##########################################################
+'''
+
+# 13. Create a function returning a dictionary, where keys stand for starting
+# letters of countries and values are the number of country names starting
+# with that letter.
+from functools import reduce
+def country_letter_count(c_dict, country):
+    first_letter = country[0]
+    if first_letter in c_dict: 
+        c_dict[first_letter] += 1
+    else:
+        c_dict[first_letter] = 1
+    return c_dict
+
+country_dict = reduce(country_letter_count, country_list, {})
+#print(country_dict)
+''' 
+####################### OUTPUT ##########################
+{'A': 11, 'B': 17, 'C': 18, 'D': 4, 'E': 8, 'F': 3, 'G': 11, 'H': 3, 'I': 8, 'J': 3, 'K': 7, 
+'L': 9, 'M': 18, 'N': 9, 'O': 1, 'P': 9, 'Q': 1, 'R': 3, 'S': 25, 'T': 11, 'U': 7, 'V': 4, 'Y': 1, 'Z': 2}
+##########################################################
+'''
+''' 
+how reduce(function, iterable, initializer) works
+acc = initializer
+for item in iterable:
+    acc = function(acc, item)
+return acc
+
+while function defination:
+def function(acc, iterable)
+'''
+
+# 14. Declare a get_first_ten_countries function - it returns a list of 
+# first ten countries from the countries.js list in the data folder.
+
+def get_first_ten_countries(country_list):
+    print(list(map(str.title, country_list[:10])))
+
+#get_first_ten_countries(country_list)
+# >> ['Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola', 'Antigua And Barbuda', 'Argentina', 'Armenia', 'Australia', 'Austria']
+
+# 15. Declare a get_last_ten_countries function that returns the 
+# last ten countries in the countries list.
+def get_last_ten_countries(country_list):
+    print(list(map(str.title, country_list[-10:])))
+
+#get_last_ten_countries(country_list)
+# >> ['United States', 'Uruguay', 'Uzbekistan', 'Vanuatu', 'Vatican City', 'Venezuela', 'Vietnam', 'Yemen', 'Zambia', 'Zimbabwe']
+
+
+## Exercise level - 3
+# Use the countries_data.py file and follow the tasks below:
+with open("countries_data.py", "r", encoding="utf-8") as file:
+    data = file.read()
+
+countries_data = eval(data)
+#print(countries_data[:5])
+
+# 1. Sort countries by name, by capital, by population
+# def sort_by_name(countries_data):
+#     return sorted(countries_data, key= lambda country:country['name'])
+
+# sorted_country_name = map(lambda c:c['name'], sort_by_name)
+# print(list(sorted_country_name))
+
+# 2. Sort out the ten most spoken languages by location.
+def language(lang_dict, country_data):
+    for lang in country_data['languages']:
+        if lang in lang_dict:
+            lang_dict[lang] += 1
+        else:
+            lang_dict[lang] = 1
+    return lang_dict
+
+lang_count = reduce(language, countries_data, {})
+top_10_lang = sorted(lang_count.items(), key=lambda item:item[1], reverse=True)[:10]
+#print(dict(top_10_lang))
+''' 
+####################### OUTPUT ##########################
+{'English': 91, 'French': 45, 'Arabic': 25, 'Spanish': 24, 'Portuguese': 9, 'Russian': 9, 'Dutch': 8, 'German': 7, 'Chinese': 5, 'Serbian': 4}
+##########################################################
+'''
+
+# 3. Sort out the ten most populated countries.
+def population(pop_dict, country_data):
+    pop_dict[country_data['name']] = country_data['population']
+    return pop_dict
+
+pop_dict = reduce(population, countries_data, {})
+top_10_poplated_countries = sorted(pop_dict.items(), key=lambda items:items[1], reverse=True)[:10]
+#print(dict(top_10_poplated_countries))
+''' 
+####################### OUTPUT ##########################
+{'China': 1377422166, 'India': 1295210000, 'United States of America': 323947000, 'Indonesia': 258705000, 'Brazil': 206135893, 'Pakistan': 194125062, 'Nigeria': 186988000, 'Bangladesh': 
+161006790, 'Russian Federation': 146599183, 'Japan': 126960000}
+##########################################################
+'''
+
 
 
 
