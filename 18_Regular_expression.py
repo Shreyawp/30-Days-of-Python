@@ -2,7 +2,7 @@
 
 # Regular Expressions
 import re
-
+"""
 ## re.match(sunstring, string, re.I)
 txt = 'I love to teach python and javaScript'
 match = re.match('I love to teach', txt, re.I)
@@ -162,11 +162,90 @@ reg_pat = r'[^a-zA-Z ]+'         # (^) here is negation
 m4 = re.findall(reg_pat, txt)
 print(m4)
 # >> ['6,', '2019', '8,', '2021']
+"""
+## Exercise
 
-# 1.
+# 1. What is the most frequent word in the following paragraph?
+paragraph = 'I love teaching. If you do not love teaching what else can you love. I love Python if you do not love something which can give you all the capabilities to develop an application what else can you love.'
 
+def count_words(txt):
+    words_dict = {}
+    txt = txt.replace('.', '')
+    for i in txt.lower().split(' '):
+        if i in words_dict:
+            words_dict[i] += 1
+        else:
+            words_dict[i] = 1
+    return sorted(words_dict.items(), key=lambda x:x[1], reverse=True)
+    
+print(count_words(paragraph))
 ''' 
 ####################### OUTPUT ##########################
+[('love', 6), ('you', 5), ('can', 3), ('i', 2), ('teaching', 2), ('if', 2), ('do', 2), ('not', 2), ('what', 2), ('else', 2), ('python', 1), ('something', 1), ('which', 1), ('give', 1), ('all', 1), ('the', 1), ('capabilities', 1), ('to', 1), ('develop', 1), ('an', 1), ('application', 1)]
+##########################################################
+'''
 
+# 2. The position of some particles on the horizontal x-axis are 
+# -12, -4, -3 and -1 in the negative direction, 0 at origin,
+# 4 and 8 in the positive direction. Extract these numbers from
+# this whole text and find the distance between the two furthest particles.
+
+points = ['-12', '-4', '-3', '-1', '0', '4', '8']
+
+def distance_between_particles(points):
+    sorted_points = list(map(int,points))
+    distance = sorted_points[-1] - sorted_points[0]
+    print(distance)
+
+distance_between_particles(points)
+# >> 20
+
+
+# 3. Write a pattern which identifies if a string is a valid python variable
+def is_valid_variable(var):
+    valid_pattern = r'^[a-zA-Z_][a-zA-Z0-9_]*$'
+    if re.fullmatch(valid_pattern, var):
+        print(True)
+    else: 
+        print(False)
+
+
+is_valid_variable('first_name')
+is_valid_variable('first-name') 
+is_valid_variable('1first_name') 
+is_valid_variable('firstname') 
+''' 
+####################### OUTPUT ##########################
+True
+False
+False
+True
+##########################################################
+'''
+
+# 4. Clean the following text. After cleaning, count three most frequent words in the string.
+sentence = '''%I $am@% a %tea@cher%, &and& I lo%#ve %tea@ching%;. There $is nothing; &as& mo@re rewarding as educa@ting &and& @emp%o@wering peo@ple. ;I found tea@ching m%o@re interesting tha@n any other %jo@bs. %Do@es thi%s mo@tivate yo@u to be a tea@cher!?'''
+
+def clean_txt(txt):
+    clean = re.sub(r'[^A-Za-z0-9\s]', '', txt)
+    return clean
+
+cleaned_txt = clean_txt(sentence)
+def most_frequent_words(txt):
+    word_dict = {}
+    for word in txt.lower().split():
+        if word in word_dict:
+            word_dict[word] += 1
+        else:
+            word_dict[word] = 1
+    return sorted(word_dict.items(), key=lambda x:x[1], reverse=True)[:3]
+
+cleaned_txt = clean_txt(sentence)
+print(cleaned_txt)
+print(most_frequent_words(cleaned_txt))
+''' 
+####################### OUTPUT ##########################
+I am a teacher and I love teaching There is nothing as more rewarding as educating and empowering people I found teaching more interesting than any other jobs Does this motivate you to be a teacher
+[('i', 3), ('a', 2), ('teacher', 2)]
 ##########################################################
 '''
