@@ -212,7 +212,7 @@ Field:  city
 Field:  skills
 ##########################################################
 '''
-"""
+
 # Exercise 
 
 # 1. Write a function which count number of lines and number of words in a text. All the files are in the data the folder:
@@ -309,9 +309,6 @@ def find_most_common_words(file_name, n):
 print(find_most_common_words('./data/romeo_and_juliet.txt', 10))
 # >> [('the', 762), ('I', 549), ('and', 539), ('to', 522), ('of', 485), ('a', 453), ('in', 330), ('is', 322), ('my', 310), ('with', 274)]
 
-print(find_most_common_words('./data/romeo_and_juliet.txt', 5))
-# >> [('the', 762), ('I', 549), ('and', 539), ('to', 522), ('of', 485)]
-
 # 6. Use the function, find_most_frequent_words to find: 
 
 def find_most_frequent_words(filename, n):
@@ -329,10 +326,48 @@ def find_most_frequent_words(filename, n):
 files = ['./data/obama_speech.txt', './data/michelle_obama_speech.txt', './data/donald_speech.txt', './data/melina_trump_speech.txt']
 for f in files:
     print(f"The most frequent words in {os.path.basename(f)}: ", find_most_frequent_words(f,5))
-"""
+''' 
+####################### OUTPUT ##########################
 The most frequent words in obama_speech.txt:  [('the', 120), ('and', 107), ('of', 81), ('to', 66), ('our', 58)]
 The most frequent words in michelle_obama_speech.txt:  [('to', 83), ('and', 80), ('the', 78), ('of', 46), ('â€”', 41)]
 The most frequent words in donald_speech.txt:  [('the', 61), ('and', 53), ('will', 40), ('of', 38), ('to', 32)]
 The most frequent words in melina_trump_speech.txt:  [('and', 73), ('to', 54), ('the', 48), ('I', 28), ('is', 28)]
+##########################################################
+'''
+
+
+# 7. 
+
+# 8. Find the 10 most repeated words in the romeo_and_juliet.txt
+print(find_most_common_words('./data/romeo_and_juliet.txt', 5))
+# >> [('the', 762), ('I', 549), ('and', 539), ('to', 522), ('of', 485)]
+
 """
+# 9. Read the hacker news csv file and find out: 
+import csv
+import re
+
+def count_number_of_rows_pattern_match(pattern):
+    with open('./data/hacker_news.csv') as f:
+        csv_reader = csv.reader(f, delimiter=',')
+        count = 0
+        for row in csv_reader:
+            text = " ".join(row)
+            if re.search(rf'\b{pattern}\b', text, re.I):
+                count += 1
+        return count
+
+print(f"Rows containing 'python': ", count_number_of_rows_pattern_match('python'))
+print(f"Rows containing 'javascript': ", count_number_of_rows_pattern_match('javascript'))
+print(f"Rows containing 'java': ", count_number_of_rows_pattern_match('java'))
+''' 
+####################### OUTPUT ##########################
+Rows containing 'python':  162
+Rows containing 'javascript':  183
+Rows containing 'java':  59
+##########################################################
+'''
+
+
+
 
