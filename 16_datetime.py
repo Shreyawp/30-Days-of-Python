@@ -58,7 +58,7 @@ Timestamp: 1751989507.870142
 
 ## Formatting Date Output Using strftime()
 
-import pytz     # to provide timezone
+import pytz     # type: ignore # to provide timezone
 now = datetime.now(pytz.timezone("Asia/Kolkata"))
 t = now.strftime("%H:%M:%S")
 print("Time: ",t)
@@ -213,4 +213,7 @@ year = datetime(1970,1,1)
 print("time difference between 1 January 1970 and now: ", now-year)
 # >> time difference between 1 January 1970 and now:  20277 days, 23:40:41.132533
 
-
+# 6. Think, what can you use the datetime module for? Examples:
+# Time series analysis
+# To get a timestamp of any activities in an application
+# Adding posts on a blog

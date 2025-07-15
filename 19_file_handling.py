@@ -1,7 +1,7 @@
 # Day 19: 30 Days of python programming
 
 # File Handling
-
+"""
 f = open('./example_file.txt', 'w')
 print(f)
 # >> <_io.TextIOWrapper name='./example_file.txt' mode='w' encoding='cp1252'>
@@ -212,15 +212,127 @@ Field:  city
 Field:  skills
 ##########################################################
 '''
+"""
+# Exercise 
 
+# 1. Write a function which count number of lines and number of words in a text. All the files are in the data the folder:
+import os
+def count_lines_and_words(file_path):
+    with open(file_path) as file:
+        lines = file.readlines()
+        words = " ".join(lines).split()
+        print(f"Number of lines in {os.path.basename(file_path)}: ", len(lines))
+        print(f"Number of words in {os.path.basename(file_path)}:", len(words))
 
-
-
-
-# 1.
-
+count_lines_and_words('./data/obama_speech.txt')
+count_lines_and_words('./data/michelle_obama_speech.txt')
+count_lines_and_words('./data/donald_speech.txt')
+count_lines_and_words('./data/melina_trump_speech.txt')
 ''' 
 ####################### OUTPUT ##########################
-
+Number of lines in obama_speech.txt:  66
+Number of words in obama_speech.txt: 2400
+Number of lines in michelle_obama_speech.txt:  83
+Number of words in michelle_obama_speech.txt: 2204
+Number of lines in donald_speech.txt:  48
+Number of words in donald_speech.txt: 1259
+Number of lines in melina_trump_speech.txt:  33
+Number of words in melina_trump_speech.txt: 1375
 ##########################################################
 '''
+
+# 2. Read the countries_data.json data file in data directory, create a function that finds the ten most spoken languages
+import json
+
+def most_spoken_lang(filename, n):
+    with open(filename , 'r', encoding='utf-8') as f:
+        countries_data = json.load(f)
+
+    lang_dict = {}
+    for country in countries_data:
+        for lang in country['languages']:
+            if lang in lang_dict:
+                lang_dict[lang] += 1
+            else:
+                lang_dict[lang] = 1
+    print(sorted(lang_dict.items(), key=lambda item:item[1], reverse=True)[:n])
+
+most_spoken_lang('./data/countries_data.json', 3)
+most_spoken_lang('./data/countries_data.json', 10)
+''' 
+####################### OUTPUT ##########################
+[('English', 91), ('French', 45), ('Arabic', 25)]
+[('English', 91), ('French', 45), ('Arabic', 25), ('Spanish', 24), ('Portuguese', 9), ('Russian', 9), ('Dutch', 8), ('German', 7), ('Chinese', 5), ('Serbian', 4)]
+##########################################################
+'''
+
+# 3. create a function that creates a list of the ten most populated countries
+def most_populated_countries(filename, n):
+    with open(filename, 'r', encoding='utf-8') as f:
+        countries_data = json.load(f)
+
+    country_pop = []
+    for country in countries_data:
+        country_pop_dict = {'country':country['name'], 'population':country['population']}
+        country_pop.append(country_pop_dict)
+    return sorted(country_pop, key=lambda x:x['population'], reverse=True)[:n]
+
+print(most_populated_countries('./data/countries_data.json', 3))
+print(most_populated_countries('./data/countries_data.json', 10))
+''' 
+####################### OUTPUT ##########################
+[{'country': 'China', 'population': 1377422166}, {'country': 'India', 'population': 1295210000}, {'country': 'United States of America', 'population': 323947000}]
+[{'country': 'China', 'population': 1377422166}, {'country': 'India', 'population': 1295210000}, {'country': 'United States of America', 'population': 323947000}, {'country': 'Indonesia', 'population': 258705000}, {'country': 'Brazil', 'population': 206135893}, {'country': 'Pakistan', 'population': 194125062}, {'country': 'Nigeria', 'population': 186988000}, {'country': 'Bangladesh', 'population': 161006790}, {'country': 'Russian Federation', 'population': 146599183}, {'country': 'Japan', 'population': 126960000}]
+##########################################################
+'''
+
+# 4. Extract all incoming email addresses as a list from the email_exchange_big.txt file.
+import re
+
+with open('./data/email_exchanges_big.txt') as f:
+    text = f.read()
+    #print(re.findall(r'From [A-Za-z0-9/s]*@[A-Za-z0-9]*.[A-Za-z0-9]*', text))
+
+# 5. Find the most common words in the English language. Call the name of your function find_most_common_words
+def find_most_common_words(file_name, n):
+    word_dict = {}
+    with open(file_name) as f:
+        text = f.read()
+    
+    for words in text.split():
+        if words in word_dict:
+            word_dict[words] += 1
+        else:
+            word_dict[words] = 1
+    return sorted(word_dict.items(), key=lambda x:x[1], reverse=True)[:n]
+
+print(find_most_common_words('./data/romeo_and_juliet.txt', 10))
+# >> [('the', 762), ('I', 549), ('and', 539), ('to', 522), ('of', 485), ('a', 453), ('in', 330), ('is', 322), ('my', 310), ('with', 274)]
+
+print(find_most_common_words('./data/romeo_and_juliet.txt', 5))
+# >> [('the', 762), ('I', 549), ('and', 539), ('to', 522), ('of', 485)]
+
+# 6. Use the function, find_most_frequent_words to find: 
+
+def find_most_frequent_words(filename, n):
+    with open(filename) as f:
+        text = f.read()
+    
+    word_dict ={}
+    for words in text.split():
+        if words in word_dict:
+            word_dict[words] += 1
+        else:
+            word_dict[words] = 1
+    return sorted(word_dict.items(), key=lambda x:x[1], reverse=True)[:n]
+
+files = ['./data/obama_speech.txt', './data/michelle_obama_speech.txt', './data/donald_speech.txt', './data/melina_trump_speech.txt']
+for f in files:
+    print(f"The most frequent words in {os.path.basename(f)}: ", find_most_frequent_words(f,5))
+"""
+The most frequent words in obama_speech.txt:  [('the', 120), ('and', 107), ('of', 81), ('to', 66), ('our', 58)]
+The most frequent words in michelle_obama_speech.txt:  [('to', 83), ('and', 80), ('the', 78), ('of', 46), ('â€”', 41)]
+The most frequent words in donald_speech.txt:  [('the', 61), ('and', 53), ('will', 40), ('of', 38), ('to', 32)]
+The most frequent words in melina_trump_speech.txt:  [('and', 73), ('to', 54), ('the', 48), ('I', 28), ('is', 28)]
+"""
+
