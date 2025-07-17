@@ -1,7 +1,7 @@
 # Day 19: 30 Days of python programming
 
 # File Handling
-"""
+
 f = open('./example_file.txt', 'w')
 print(f)
 # >> <_io.TextIOWrapper name='./example_file.txt' mode='w' encoding='cp1252'>
@@ -291,7 +291,11 @@ import re
 
 with open('./data/email_exchanges_big.txt') as f:
     text = f.read()
-    #print(re.findall(r'From [A-Za-z0-9/s]*@[A-Za-z0-9]*.[A-Za-z0-9]*', text))
+    mail_pattern = r'^From\s+(\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\b)'
+    print(re.findall(mail_pattern, text, re.MULTILINE))
+
+# >> ['stephen.marquard@uct.ac.za', 'louis@media.berkeley.edu', 'zqian@umich.edu', 'rjlowe@iupui.edu', 'zqian@umich.edu', 'rjlowe@iupui.edu', 'cwen@iupui.edu', 'cwen@iupui.edu', 'gsilver@umich.edu', ...]
+
 
 # 5. Find the most common words in the English language. Call the name of your function find_most_common_words
 def find_most_common_words(file_name, n):
@@ -335,14 +339,51 @@ The most frequent words in melina_trump_speech.txt:  [('and', 73), ('to', 54), (
 ##########################################################
 '''
 
+# 7. Write a python application that checks similarity between two texts. 
+# It takes a file or a string as a parameter and it will evaluate the similarity of the two texts.
+import re
+import sys 
 
-# 7. 
+
+def clean_text(file_name):
+    with open(file_name) as f:
+        text = f.read()
+        return re.sub(r'[^A-Za-z0-9\s]','',text).lower()
+
+def remove_stop_words(text):
+    sys.path.append('./data')
+    from stop_words import stop_words
+
+    cleaned_text = clean_text(text)
+    
+    filtered_text = [word for word in cleaned_text.split() if word not in stop_words]
+    return " ".join(filtered_text)
+
+def check_text_similarity(file1, file2):
+    text1 = set(remove_stop_words(file1))
+    text2 = set(remove_stop_words(file2))
+    if not text1 or not text2:
+        return 0
+    
+    common_words = text1.intersection(text2)
+    total_unique = text1.union(text2)
+    similarity = len(common_words)/len(total_unique)
+    return round(similarity, 2)
+
+def main():
+    file1 = './data/michelle_obama_speech.txt'
+    file2 = './data/melina_trump_speech.txt'
+    similarity = check_text_similarity(file1,file2)
+    print(f'Similarity: {similarity*100}%')
+       
+if __name__ == "__main__":
+    main()
 
 # 8. Find the 10 most repeated words in the romeo_and_juliet.txt
 print(find_most_common_words('./data/romeo_and_juliet.txt', 5))
 # >> [('the', 762), ('I', 549), ('and', 539), ('to', 522), ('of', 485)]
 
-"""
+
 # 9. Read the hacker news csv file and find out: 
 import csv
 import re
@@ -367,7 +408,4 @@ Rows containing 'javascript':  183
 Rows containing 'java':  59
 ##########################################################
 '''
-
-
-
 
