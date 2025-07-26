@@ -167,7 +167,6 @@ Lidiya Teklemariam is 28 years old. She lives in Espoo, Finland.
 ##########################################################
 '''
 
-
 ## Exercise
 
 # 1. create a class called Statistics and create all the functions that do 
@@ -175,6 +174,10 @@ Lidiya Teklemariam is 28 years old. She lives in Espoo, Finland.
 class Statistics:
     def __init__(self, num_list):
         self.num_list = num_list
+        freq = {}
+        for i in self.num_list:
+            freq[i] = freq.get(i, 0) + 1
+        self.freq = freq
     def count(self):
         return len(self.num_list)
     def sum(self):
@@ -189,21 +192,28 @@ class Statistics:
         mean = self.sum()/self.count()
         return round(mean)
     def median(self):
+        sorted_data = sorted(self.num_list)
         mid_idx = int(self.count()/2)
-        median = self.num_list[mid_idx]
+        median = sorted_data[mid_idx]
         return median
-    # def mode(self):
-    #     return mode
+    def mode(self):        
+        max_freq = max(self.freq.values())
+        for val,freq in self.freq.items():
+            if freq == max_freq:
+                return (val,freq)
     def variance(self):
         return sum((x - self.mean())**2 for x in self.num_list)/self.count()
     def standard_deviation(self):
         import math
         return math.sqrt(self.variance())
-    def frequency_distribution(self):
-        freq = {}
-        for i in self.num_list:
-            freq[i] = freq.get(i, 0) + 1
-        return freq
+    def frequency_distribution(self):        
+        freq_dist = []
+        total = self.count()
+        for val,f in self.freq.items():
+            percent = round((f/total)*100, 1)
+            freq_dist.append((percent,val))
+        freq_dist.sort(reverse=True)
+        return freq_dist
 
 
 ages = [31, 26, 34, 37, 27, 26, 32, 32, 26, 27, 27, 24, 32, 33, 27, 25, 26, 38, 37, 31, 34, 24, 33, 29, 26]
@@ -216,7 +226,7 @@ print('Max: ', data.max())
 print('Range: ', data.range())
 print('Mean: ', data.mean())
 print('Median: ', data.median())
-#print('Mode: ', data.mode())
+print('Mode: ', data.mode())
 print('Variance: ', data.variance())
 print('Standard Deviation: %.2f' %data.standard_deviation())
 print('Freqency Distribution: ', data.frequency_distribution())
@@ -229,11 +239,11 @@ Min:  24
 Max:  38
 Range:  14
 Mean:  30
-Median:  32
+Median:  29
+Mode:  (26, 5)
 Variance:  17.6
 Standard Deviation: 4.20
-Freqency Distribution:  {31: 2, 26: 5, 34: 2, 37: 2, 27: 4, 32: 3, 24: 2, 33: 2, 25: 1, 38: 
-1, 29: 1}
+Freqency Distribution:  [(20.0, 26), (16.0, 27), (12.0, 32), (8.0, 37), (8.0, 34), (8.0, 33), (8.0, 31), (8.0, 24), (4.0, 38), (4.0, 29), (4.0, 25)]
 ##########################################################
 '''
 
@@ -270,7 +280,7 @@ class PersonAccount:
     
 p1 = PersonAccount('John', 'Doe')
 incomes = ('Salary', 5000), ('Freelance',1200)
-expenses = [('Rent',1500), ('groceries', 400)]
+expenses = ('Rent',1500), ('groceries', 400)
 for i in incomes:
     p1.add_income(i)
 for e in expenses:
