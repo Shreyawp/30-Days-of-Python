@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
-"""
+
 with open('./data/simple.html') as html_file:
     soup = BeautifulSoup(html_file, 'lxml')
 
@@ -73,7 +73,7 @@ Article 2 Headline
 This is a summary of article 2
 ##########################################################
 '''
-"""
+
 
 src = requests.get('https://medium.com/@venkat3010/python-basics-for-beginners-a-complete-guide-a5f01b73232f').text
 
