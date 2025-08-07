@@ -1,3 +1,9 @@
+# Day 12: 30 Days of python programming
+
+# Modules -- Creating and importing package module 
+# random 
+# string
+
 import random
 import string
 

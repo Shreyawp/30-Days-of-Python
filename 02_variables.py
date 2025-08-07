@@ -1,5 +1,7 @@
 # Day 2: 30 Days of python programming
 
+## Variables
+
 first_name = "Shreya"
 last_name = "Parse"
 full_name = "Shreya Vasudev Parse"

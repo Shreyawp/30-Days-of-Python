@@ -1,6 +1,10 @@
 # Day 19: 30 Days of python programming
 
-# File Handling
+## File Handling
+# Text file
+# json file
+# csv file
+# xml file
 
 f = open('./example_file.txt', 'w')
 print(f)

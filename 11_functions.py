@@ -1,5 +1,7 @@
 # Day 11: 30 Days of python programming
 
+## Functions
+
 ## Exercises: Level 1
 
 # 1. Declare a function add_two_numbers. 

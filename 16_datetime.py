@@ -1,7 +1,9 @@
 # Day 16: 30 Days of python programming
 
+## Datetime package
+
 import datetime
-#print(dir(datetime))
+print(dir(datetime))
 ''' 
 ####################### OUTPUT ##########################
 ['MAXYEAR', 'MINYEAR', '__all__', '__builtins__', '__cached__', '__doc__', 

@@ -1,4 +1,9 @@
-'''
+# Day 20: 30 Days of python programming
+
+## Package Manager -- Installing, Creating, Importing packages and view package info
+## Request Package
+
+''' *********************************** Terminal ****************************************
 > pip --version
 pip 23.0.1 from C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\site-packages\pip (python 3.10)
 

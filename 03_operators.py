@@ -1,5 +1,9 @@
 # Day 3: 30 Days of python programming
 
+## operator -- Airthmetic, logical
+## keywords -- in, not
+## Built-in function -- range(), type(), int()
+
 # Declaring Variables
 my_age = 27
 _my_height = 5.0

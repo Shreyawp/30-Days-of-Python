@@ -1,4 +1,8 @@
-# Day 14: Higher order functions
+# Day 14: 30 Days of python programming
+
+# Higher order functions
+# decorators
+# map, filter, reduce
 
 # Functions as parameter
 def sum_nums(nums):

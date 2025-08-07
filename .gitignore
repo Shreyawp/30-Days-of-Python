@@ -1,0 +1,10 @@
+# Folders
+__pycache__/
+venv/
+data/
+example_files/ 
+learning modules/
+
+# Files
+12_modules/tempCodeRunnerFile.py
+tempCodeRunnerFile.py

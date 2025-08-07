@@ -1,5 +1,9 @@
 # Day 8: 30 Days of python programming
 
+## Dictionary
+
+# Exercise
+
 # 1. Create an empty dictionary called dog
 dog = dict()  
 # >> {}

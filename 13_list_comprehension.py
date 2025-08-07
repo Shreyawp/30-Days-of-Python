@@ -1,5 +1,7 @@
-# Day 13: List comprehension
-"""
+# Day 13: 30 Days of python programming
+
+# List comprehension
+
 language = 'Python For All'
 # lst = list(language)
 lst = [i for i in language]
@@ -74,7 +76,7 @@ print(cube)
 two_power_of_five = power(2)(5)
 print(two_power_of_five)
 # >> 32
-"""
+
 ## Exercise
 
 # 1.  Filter only negative and zero in the list using list comprehension

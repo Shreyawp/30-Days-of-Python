@@ -1,3 +1,6 @@
+# Day 24: 30 Days of python programming
+
+## NUMPY ##
 import numpy as np
 
 print('Numpy version: ', np.__version__)

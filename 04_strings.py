@@ -1,5 +1,9 @@
 # Day 4: 30 Days of python programming
 
+# Strings
+
+## Exercise
+
 # 1. Concatenate the string 'Thirty', 'Days', 'Of', 'Python' to 
 # a single string, 'Thirty Days Of Python'.
 print('Thirty ' + 'Days '+ 'of ' + 'Python')
