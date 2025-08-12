@@ -1,0 +1,82 @@
+Steps followed to create new application and routes
+
+Step 1: Create new app called 'blog'. It will create new folder 'blog' creating app structure
+>> python manage.py startapp blog
+   ** New folder 'blog' is created **
+    C:./26_python_for_web/django_project/
+    │───db.sqlite3
+    │───manage.py
+    │
+    ├───blog
+    │   │---admin.py
+    │   │---apps.py
+    │   │---models.py
+    │   │---tests.py
+    │   │---views.py
+    │   │---__init__.py
+    │   │
+    │   └───migrations
+    │       └───__init__.py
+    │
+    ├───django_project
+
+
+Step 2: Goto '/blog/views.py' and write functions 'home' and 'about' for website:
+    def home(request):
+        return HttpResponse('<h1>Blog Home</h1>')
+
+    def about(request):
+        return HttpResponse('<h1>Blog About</h1>')
+
+Step 3: Mapping urls to views.functions
+Create new file urls.py in blog, import views.py file and call above functions:
+    from django.urls import path
+    from . import views
+
+    urlpatterns = [
+        path('', views.home, name='blog-home'),
+        path('about/', views.about, name='blog-about'),
+    ]
+
+Step 4: Mapping blog/urls.py to django_projects/urls.py
+Included blog urls to 'django_project/urls.py' using include()
+    from django.urls import path, include
+
+    urlpatterns = [
+        path('admin/', admin.site.urls),
+        path('blog/', include('blog.urls')),
+    ]
+
+** This tells whole website which urls should send user to blog app **
+
+** include() routes to given string and chops off anything before string. 
+Initally, it processed blog part of url, which include() has choped of remaing with empty string.
+This matches to '' in blog/urls step 3**
+
+Step 5: Now run server, open the localhost:8000 and explore website
+>> python manage.py runserver
+    ** the localhost will show 404 error (Not Found) instead of default development site as it dint find the urls it tried to match: 
+    - blog/
+    - about/  **
+
+Step 6: Open "localhost:8000/blog"
+    ** Opens the webpage with written "Blog Home" **
+    Right-click -> view page source
+    ** Page displays http response **
+    <h1>Blog Home</h1>
+
+Step 7: Open "localhost:8000/blog/about"
+    ** Opens about webpage with "Blog About" **
+
+Step 8: To create homepage "blog home" on 'localhost:8000', change the code in 'django_project/urls.py' 
+    path('blog/', include('blog.urls')),
+    to
+    path('', include('blog.urls')),
+
+** string in path(str) is url, if we change it to "blog_dev" our homepage url is "localhost:8000/blog_dev" and about page to "localhost:8000/blog_dev/about" url **
+
+Step 9: Now open "localhost:8000" 
+    ** It will show page "Blog Home" **
+    
+Step 10: Open "localhost:8000/about"
+

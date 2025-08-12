@@ -1,0 +1,81 @@
+#### Documenting after each video tutorial and implementation ####
+
+Steps followed on Getting started with django project:
+
+Step 1 : created and activated venv in /26_python_web/
+>> python -m venv venv
+>> venv/Scripts/activate
+
+Step 2 : Installed django and verify version and other packages
+>> pip install django
+>> pip freeze
+    asgiref==3.9.1
+    Django==5.2.5
+    sqlparse==0.5.3
+    typing_extensions==4.14.1
+    tzdata==2025.2
+>> python -m django --verison
+    5.2.5
+
+Step 3 : Checkout the available django commands
+>> python -m django
+    Type 'python -m django help <subcommand>' for help on a specific subcommand.
+
+Available subcommands:
+
+[django]
+    check
+    compilemessages
+    createcachetable
+    dbshell
+    diffsettings
+    dumpdata
+    flush
+    inspectdb
+    loaddata
+    makemessages
+    makemigrations
+    migrate
+    optimizemigration
+    runserver
+    sendtestemail
+    shell
+    sqlflush
+    sqlmigrate
+    sqlsequencereset
+    squashmigrations
+    startapp
+    startproject
+    test
+    testserver
+
+Step 4 : Create a new project
+>> python -m django startproject django_project
+    ** This will create folder "django_project" containing manage.py and other dafault files and folders **
+    C:./26_python_for_web/django_project/
+    │---db.sqlite3
+    │---getting_started
+    │---manage.py
+    │
+    └───django_project
+        │---asgi.py
+        │---settings.py
+        │---urls.py
+        │---wsgi.py
+        │---__init__.py
+        │
+        └───__pycache__
+                ...
+
+
+Step 5 : Goto "django_project/" and run server
+django_project/
+ >> python manage.py runserver
+    August 12, 2025 - 10:55:53
+    Django version 5.2.5, using settings 'django_project.settings'Starting development server at http://127.0.0.1:8000/
+    Quit the server with CTRL-BREAK.
+        ** Open the given url http://127.0.0.1:8000/ in browser **
+
+Step 6 : Explore the webpage
+    ** given host is localhost: 127.0.0.1, Hence can change to http://localhost:8000/ **
+    ** Try localhost:8000/admin >> will open django authentication site as give in file "./django_project/urls.py" **
