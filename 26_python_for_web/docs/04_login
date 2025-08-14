@@ -1,0 +1,39 @@
+### Login page ##
+
+Step 1: First we try to create superuser or admin of webpage. Run following command in terminal to create superuser.
+>> python manage.py createsuperuser
+** sqlite3.OperationalError: no such table: auth_user **
+
+Step 2: Create migrations for the app to create the tables in the database. 
+>> python manage.py makemigrations 
+        No changes detected
+
+Step3: Apply the migrations to create the tables in the database.
+>> python manage.py migrate
+    Operations to perform:
+        Apply all migrations: admin, auth, contenttypes, sessions
+    Running migrations:
+        Applying contenttypes.0001_initial... OK
+        Applying auth.0001_initial... OK
+        ...
+
+Step 4: Create superuser, now it should run error-free
+>> python manage.py createsuperuser
+    Username (leave blank to use 'admin'): ShreyaVP
+    Email address: shreya1234@gmail.com
+    Password:
+    Password (again):
+
+Step 5: Verify if login page works.
+>> python manage.py runserver
+    ** Open the browser and go to http://127.0.0.1:8000/admin **
+    ** Enter the username and password created above **
+    ** You should be able to login successfully **
+
+Step 6: Create a new user. 
+- click on 'users' under "authentication and authorization"
+- click on 'add users' button at top-right corner.
+- enter the details of the new user and click on 'save' button.
+** You should be able to create a new user successfully **
+- new user will showup on user table
+

@@ -1,0 +1,150 @@
+### Creating Templates ####
+
+Step 1: Include our app to the projects `django_projects/settings.py`
+        - Open `blog/apps.py` and copy classname "BlogConfig". 
+        - Add this class name to `django_projects/settings.py` under installed app list
+            INSTALLED_APPS = [
+                            'django.contrib.admin',
+                            ...
+                            'blog.apps.BlogConfig',
+                        ]
+
+Step 2: Remove the HttpResponse from `blog/views.py`
+
+Step 3: Create a new folder called `template/blog/` in blog/ and create html files
+        - home.html > for our homepage
+        - about.html > for our about page
+
+Step 4: Add following template code to both html files
+<!DOCTYPE html>
+<html>
+    <head> 
+    </head>
+    <body>
+        <h1>Blog home!</h1>
+    </body>
+</html>
+
+Step 5: In `views.py`, replace return HttpResponse with render function which pass the string of home.html template.
+    def home(request):
+        return render(request, 'blog/home.html')
+    def about(request):
+        return render(request, 'blog/about.html')
+    ** The template name should be the relative path from the project root directory to the template file. **
+   
+Step 6: Dry run test if above code works.
+>> python manage.py runserver
+** open localhost and verify both page and view its source code **
+
+Step 7: Add posts as lists of dictionary of static post to `views.py`
+        posts = [
+            {
+                'author': 'ShreyaVP',
+                'title': 'Blog Post 1',
+                'content':'First post content',
+                'Date-posted':'August 13, 2025'
+            },
+            {
+                'author': 'Jimin Park',
+                'title': 'Blog Post 2',
+                'content':'Second post content',
+                'Date-posted':'August 15, 2025'
+            }
+        ]
+
+Step 8: Add posts to homepage.
+    def home(request):
+        context = {
+            'posts': posts
+        }
+        return render(request, 'blog/home.html', context)
+
+Step 9: Add the posts to homepage.
+        Remove heading and using for loop to body in home.html
+        <body>
+        {% for post in posts %}
+            <h1>{{ post.title }}</h1>
+            <p>By {{ post.author }} on {{ post.date }}</p>
+            <p>{{ post.content }}</p>
+        {% endfor %}
+    </body>
+** code in html file is encoded within {% %} and call variables using {{}} **
+
+Step 10: Add appropriate titles to both html pages, this will display the title in webpage title.
+        <head>
+            {% if title %}
+                <title>Django Blog - {{title}}</title>
+            {% else %}
+                <title>Django Blog</title>
+            {% endif %}   
+        </head>
+** Refresh the page and check the title of webpage on tabs **
+
+Step 11: Lets add title to About page from `views.py` in render()
+    def about(request):
+        return render(request, 'blog/about.html', {'title':'About'})
+** Verify the same on webpage localhost/about and view its source code **
+
+
+## Template Inheritance ##
+Step 1: create a base.html a parent template for home and about files.
+<!DOCTYPE html>
+<html>
+<head>
+{% if title %}
+        <title>Django Blog - {{ title }}</title>
+    {% else %}
+        <title>Django Blog</title>
+    {% endif %}
+</head>
+<body>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
+
+Step 2: Call the base.html file in both home.html and about.html
+{% extends "blog/base.html" %}
+
+Step 3: Add content block in both home and about
+** for about.html **
+{% block content %}
+    <h1>About Page</h1>
+{% endblock content %}
+    
+Step 4: Run server and verify if the wep app is working with a base template.
+
+## Add bootstrap and css to web app ## 
+
+Step 1: Add bootstrap to make the site look better.
+Here, we copied following code from bootstrap site to head of base.html
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+And body tag of base:
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+Step 2: Create folder static/blog in blog folder and added new file `main.css`.
+content of that file was download from corey's github repo
+
+Step 3: We have also added few more tags for navigation and toggle pages whose html code was provided by corey
+https://github.com/CoreyMSchafer/code_snippets/blob/master/Django_Blog/03-Templates/django_project/blog/templates/blog/base.html
+
+Step 4: Verify the web app work and the design of the web app.
+
+
+
+
+
+
+
