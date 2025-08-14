@@ -1,0 +1,122 @@
+## Database and Migration ##
+
+Step 1: In `blog/models.py`, add class Post and define variables.
+    from django.utils import timezone
+    from django.contrib.auth.models import User
+
+    class Post(models.Model):
+        title = models.CharField(max_length=100)
+        content = models.TextField()
+        date_posted = models.DateTimeField(default=timezone.now)
+        author = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.title
+
+
+Step 2: Run below cmd to make migration file
+>> python manage.py makemigrations
+    Migrations for 'blog':
+    blog\migrations\0001_initial.py
+        + Create model Post       
+
+Step 3: Verify `blog\migrations\0001_initial.py` is created and code is generated to create database.
+Now, run cmd (blog - app_name directory, 0001-migration file):
+>> python manage.py sqlmigrate blog 0001
+    --
+    -- Create model Post
+    --
+    CREATE TABLE "blog_post" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "title" varchar(100) NOT NULL, "content" 
+    text NOT NULL, "date_posted" datetime NOT NULL, "author_idCREATE INDEX "blog_post_author_id_dd7a8485" ON "blog_post" ("author_id");
+    COMMIT;
+** SQL cmd is creating table to store our new post with column head id, post, author_id, title, content, date_posted. **
+
+Step 4: Run migrate to apply database to web app
+>> python manage.py migrate
+    Operations to perform:
+        Apply all migrations: admin, auth, blog, contenttypes, sessions
+    Running migrations:
+        Applying blog.0001_initial... OK
+
+Step 5: Open shell to run add posts
+>> python manage.py shell
+    7 objects imported automatically (use -v 2 for details).
+
+>>> from blog.models import Post
+>>> from django.contrib.auth.models import User
+>>> User.objects.all()
+<QuerySet [<User: ShreyaVP>, <User: admin>, <User: TestUser>]>
+>>> User.objects.first()
+<User: ShreyaVP>
+>>> User.objects.last() 
+<User: TestUser>
+>>> User.objects.filter(username='ShreyaVP')
+<QuerySet [<User: ShreyaVP>]>
+>>> User.objects.filter(username='ShreyaVP').first()
+<User: ShreyaVP>
+>>> user = User.objects.filter(username='ShreyaVP').first()
+>>> user
+<User: ShreyaVP>
+>>> user.id
+1
+>>> user.pk
+1
+>>> user = User.objects.get(id=1)
+<User: ShreyaVP>
+>>> Post.objects.all()
+<QuerySet []>
+>>> post_1 = Post(title='Blog 1', content='First Post Content!', author=user)
+>>> Post.objects.all()
+<QuerySet []>
+>>> post_1.save()
+>>> Post.objects.all()
+<QuerySet [<Post: Post object (1)>]>
+>>> User.objects.all()   
+<QuerySet [<User: ShreyaVP>, <User: admin>, <User: TestUser>]>
+>>> Post.objects.all()
+<QuerySet [<Post: Post object (1)>]>
+>>> user = User.objects.filter(username='ShreyaVP').first()
+>>> user
+<User: ShreyaVP>
+>>> post_2 = Post(title='Blog 2', content='Second Post Content', author_id=user.id)
+>>> post_2.save()
+>>> Post.objects.all()
+<QuerySet [<Post: Post object (1)>, <Post: Post object (2)>]>
+>>> post = Post.objects.first()
+>>> post.content
+'First Post Content!'
+>>> post.date_posted
+datetime.datetime(2025, 8, 14, 13, 8, 21, 120702, tzinfo=datetime.timezone.utc)
+>>> post.author
+<User: ShreyaVP>
+>>> post.author.email
+'shreya1234@gmail.com'
+>>> user.post_set
+<django.db.models.fields.related_descriptors.create_reverse_many_to_one_manager.<locals>.RelatedManager object at 0x0000029D9395D660>
+>>> user.post_set.all
+<bound method BaseManager.all of <django.db.models.fields.cals>.RelatedManager object at 0x0000029D9395FA00>>       
+>>> user.post_set.all()
+<QuerySet [<Post: Post object (1)>, <Post: Post object (2)>]>
+>>> user.post_set.create(title='Blog 3', content='Third Post Content!')
+<Post: Post object (3)>
+>>> Post.objects.all()
+<QuerySet [<Post: Post object (1)>, <Post: Post object (2)>, <Post: Post object (3)>]>
+>>> exit()
+
+Step 6: Add the post to `blog/admin.py`
+    from .models import Post
+    admin.site.register(Post)
+
+Step 7: Remove the dummy post from `blog/views.py` and the model to context
+    from .models import Post
+    def home(request):
+        context = {
+            'posts': Post.objects.all()
+        }
+
+Step 8: run server to verify blog post are appearing on site
+
+
+** To change format of the date posted, we have changed codeline in home.html **
+<small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+
