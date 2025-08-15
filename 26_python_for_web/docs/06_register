@@ -1,0 +1,42 @@
+## Register ##
+
+Step 1: Create new app to register new users
+>> python manage.py startapp users
+
+Step 2: Add new app to `django_projects/settings.py`
+INSTALLED_APPS = [
+    'blog.apps.BlogConfig',
+    'users.apps.UsersConfig',]
+
+Step 3: Add register url to `django_projects/urls.py`
+from users import views as users_views
+    path('register/', users_views.register, name='register'),
+
+Step 4: create `users/urls.py` and link url to views.register method
+
+Step 5: In `users/views.py`, we have created class "register" using user register form and added success message.
+
+Step 6: Create `templates/users/register.html`, we can use blog/base.html as template.
+
+STep 7: We have added bootstrap for our register page to look presentable.
+- install the following library 
+>> pip install django-crispy-forms crispy-bootstrap5
+
+- Add following setting to `django_projects/setting.py`
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+- Load this library to register.html
+{% load crispy_forms_tags %}
+
+Step 8: Run following cmmd in terminal to store the user data 
+>> python .\manage.py makemigrations
+>> python .\manage.py migrate
+
+Step 9: run server and test web app. Goto localhost/register and enter details.
+** It should redirect to homepage with message displaying account created **
+
+Step 10: verify the new register user is added. 
+- Login to web app "localhost/admin" 
+- click on users and verfiy new user in list
+
