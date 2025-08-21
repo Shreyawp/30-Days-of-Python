@@ -1,0 +1,69 @@
+## User Profile Pic ##
+
+Step 1: In users/models.py, create a class Profile
+    This class will variables displaying on Profile page of web app
+    It contains user and image.
+    Add str dunder method within class which will display the way we want
+
+Step 2: We need to make migrations for the changes in model to take place
+    Initally install pillow package since we are using method ImageField in class
+>> pip install pillow
+>> pip manage.py makemigrations
+Migrations for 'users':
+    + Create model Profile
+    ** This will create new migration file to store the Profile page data in db **
+>> python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, blog, contenttypes, sessions, users
+Running migrations:
+  Applying users.0001_initial... OK
+
+Step 3: Register the class Profile in users/admin.py file
+admin.site.register(Profile)
+
+Step 4: run server and open the website , login to admin page
+Empty Profile section will be created.
+Add profile --> select User --> choose file for image --> Save
+** Add one test user with default image **
+
+Step 5: Stop server and start shell in terminal to understand various methods
+(InteractiveConsole)
+>>> from django.contrib.auth.models import User
+>>> user = User.objects.filter(username='ShreyaVP').first()
+>>> user
+<User: ShreyaVP>
+>>> user.profile 
+>>> user.profile.image.width
+800
+>>> user.profile.image.url
+'/profile_pics/linkedIn_profile_pic.jpeg'
+>>> user = User.objects.filter(username='TestUser').first()
+>>> user
+<User: TestUser>
+>>> user.profile.image
+<ImageFieldFile: default.jpg>
+>>> quit()
+
+Step 6:The image is by default saved in home directory django_projects creating profile directory.
+Change the location of image saved:
+- in django_projects/settings.py, add new variables
+ MEDIA_ROOT = os.path.join(BASE_DIR ,'media')
+ MEDIA_URL = '/media/'
+
+MEDIA_ROOT will create the path in media where it will create profile dir where profile pics will be stored
+MEDIA_URL will be url for profile pic on website 
+
+Step 7: Goto profile.html and add code snippet which is bootstrap layout for profile webpage
+
+Step 8: In django_projects/url.py, we have to add static MEDIA_URL and MEDIA_ROOT
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+Step 9: To setup default image, place the image in media folder and rename to default.jpg
+ ** verify image name and directory by right-click on test user profile pic and check its url **
+
+Step 10: We want to avoid going to admin profile to add new user's profile, 
+instead new user should already have default pic as account is created.
+Thus, we create django singnal, create file users/signals.py and add the code 
+** Verify after creating new user, its profile has default pfp
+
