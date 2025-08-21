@@ -1,0 +1,19 @@
+## Create User update form in Profile tab ##
+
+Step 1: In users/forms.py create class UserUpdateFrom and ProfileUpdateForm
+    class UserUpdateForm has fields to update username and email
+    class ProfileUpdateForm has field to update profile pic
+
+Step 2: In users/views.py, with login decorator, add profile function with request conditions
+    call classes create in forms.py with valid conditions and save the changes
+    Add context to view the updates
+
+Step 3: To view the changes in profile webpage, open profile.html template, make code change as:
+    {{ form|crispy }}  --> {{ u_form|crispy }}
+                           {{ p_form|crispy }}
+
+Step 4: We want to view the profile pic in home page, so in home.html, we added image under article tag
+    <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
+
+Step 5: To save memory, we specified the image size to 300x300 pixels
+    In users/models.py, add save() method with conditions to resize the image using pillow library
