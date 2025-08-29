@@ -1,0 +1,111 @@
+## Create, Read, Update, Delete posts ##
+
+** create class-based views **
+
+# To view the latest blog post using ListView 
+Step 1: In blog/views.py, import ListView from django.views.generics
+    create class PostListView inherit ListView
+    here, create varaible model to posts
+
+Step 2: In blog/urls.py, create url using class PostListView.
+** webpage is looking for template with path <app>/<model>_<viewtype>.html **
+
+Step 3: thus, we add template_name to class in blog/views.py
+    here `blog/home.html`
+    Also, add context_object_name as posts since thats the list we see in home page
+
+Step 4: To have latest post at top on homepage
+    add ordering = ['-date_posted'] in class
+
+# To view a post in detail using DetailView
+Step 1: In blog/views.py, import DetailView
+    create class PostDetailedView and inherit Detailview
+    add var model to Post
+
+Step 2: Add the class in urls.py with url as 'post/<int:pk>/'
+    where pk is primary key indicating post number
+
+Step 3: create template with conventional path, here `blog/post_detail.html`
+Copy the base.html to view each post and make required change.
+here, change post to object as view single post
+
+** so, now running the server, click on each blog to check if post url can be accessed in detail view. It goes nowhere or to next webpage of that post ** 
+
+Step 4: Link the post to post-detail.html by adding url to href tag 
+    this url path will be passed to urls.py's primary key
+
+** Verify same that links are working ** 
+
+# To create new post using CreateView
+Step 1: In blog/views.py, import CreateView
+    create class PostCreateView and inherit Createview
+    add var model to Post
+    set fields = ['title','content']
+
+Step 2: create urlpattern with url 'post/new/'
+
+step 3: create template post_form.html
+    template is similar to register.html and make neccesary changes
+
+** verify server with new post urls.
+new post webpage will not add newpost without author id **
+
+Step 4: create form_valid method, it will create new post form using the author as person logged in
+
+** Check the site again to add new post 
+now, it will be asking the redirect url after successfully creating post**
+
+* redirect() -- will route to given url, view handles redirect for us
+* reverse() -- will return to given url
+
+Step 5: in blog/model.py, import reverse and add method get_absolute_url
+    return a reverse to same new post-detail created
+
+** We want to make sure the post is created or updated by logged in accountand NOT logged out user.
+we can not use decorator, @login_required with class-based view **
+
+Step 6: from django.contrib.auth.mixins import LoginRequiredMixin
+    add this method to PostCreateView parameter
+** Verify by logging out and it will redirect to login page **
+
+# To update post using UpdateView
+Step 1: In blog/views.py, import UpdateView
+    create class PostUpdateView and inherit Updateview
+    vars same as PostDetailView
+
+Step 2: add url pattern with url 'post/<int:pk>/update/' and name 'post-update'
+
+** verify url to update, once updated it will redirect to post detail view.
+But now if we access any post to update, it will update any post of any user**
+
+Step 3: To avoid updating others post, import UserPassesTestMixin to class parameter
+    add test_func() to apply update only to logged in user
+
+# To dalete post using DeleteView
+Step 1: In blog/views.py, import DeleteView
+    create class PostDeleteView and inherit DeleteView
+    vars same as PostDetailView and parameters same as PostUpdateView
+
+Step 2: Add url patterns for delete same as update url
+
+Step 3: Create template post_confirm.html to confirm if user wants to delete the post
+    Use post_form template and make required change
+    add button to delete and cancel for confirm
+
+** verify the same on server 
+If we cancel, it redirects to same page but 
+if we delete we need to add success url **
+
+Step 4: Add var success_url homepage in views delete class 
+
+** Verify the same 
+Now , we dont have urls routed to links for all above functionalities**
+
+# Add links and new post on navogation bar
+Step 1: In base.html, navigation right side, add create url before Profile
+
+Step 2: In post-detail.html, 
+    add condition for logged in user
+    add delete and update buttons to the post
+
+** Run server and verify all pages with appropriate routes
