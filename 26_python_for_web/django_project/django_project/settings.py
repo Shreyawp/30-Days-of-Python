@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+# load .env file
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -136,3 +140,22 @@ LOGIN_REDIRECT_URL = 'blog-home'
 LOGIN_URL ='login'
 
 LOGOUT_REDIRECT_URL = 'blog-home' 
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.getenv('EMAIL_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASS')
+
+"""
+from django.core.mail import send_mail
+
+send_mail(
+    subject="Test Email",
+    message="This is a test email from Django.",
+    from_email="shreya.parse22@gmail.com",
+    recipient_list=["shreya.parse22@gmail.com"],
+    fail_silently=False,
+)
+"""
