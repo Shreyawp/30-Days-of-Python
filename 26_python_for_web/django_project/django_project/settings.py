@@ -147,15 +147,3 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.getenv('EMAIL_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASS')
-
-"""
-from django.core.mail import send_mail
-
-send_mail(
-    subject="Test Email",
-    message="This is a test email from Django.",
-    from_email="shreya.parse22@gmail.com",
-    recipient_list=["shreya.parse22@gmail.com"],
-    fail_silently=False,
-)
-"""
