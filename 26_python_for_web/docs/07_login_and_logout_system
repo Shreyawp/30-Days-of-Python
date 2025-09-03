@@ -1,0 +1,50 @@
+## Add authentication (login and logout) system to wepapp ##
+
+# Login Setup
+Step 1: In `django_project/urls.py`, add login and logout url and import views
+    from django.contib.auth import views as auth_views
+   
+eg. auth_views.LoginView.as_view(template_name='users/login.html)
+
+Step 2: Create html templates for login and logout in `users/template/users`.
+- login.html is similar to register.html having crispy forms, also add register url if account is not created
+
+Step 3: once logged in app asks to redirect by default. 
+In settings.py, add variable
+LOGIN_REDIRECT_URL = 'blog-home'
+
+Step 4: in `users/views.py`, in register method, redirect to login page page after the account is created.
+
+# Logout Setup
+Step 1: Added url path for logout with following function
+    auth_views.LogoutView.as_view(template_name='users/logout.html)
+
+Step 2: Logout template having message as logged out and small link to login again
+
+Step 3: In latest django version logout does not work with as_views() and it looks for POST method. 
+Thus, added a form with action to logout in `base.html` file with submit button.
+ <form method="post" action="{% url 'logout' %}" style="display: inline;">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-link nav-item nav-link" style="background: none; border: none; cursor: pointer;">Logout</button>
+</form>    
+
+Step 4: As logout can't work if user is not logged in, we need to add conditional for navigation bar , which will decide if display login or logout.
+add code block in base.html, if user.is_authenticated, we see logout and profile on navigation bar, else login and register 
+
+# Add users profile
+** We dont want any user to update or change other user profile or blog, to avoid that add decorator which allows only logged user to change his own profile and blog, not others **
+
+Step 1: in users/views.py add profile method and render request to profile.html template.
+
+Step 2: Create template in `users/profile.html`, for now, just adding the username. 
+
+Step 3: Add this profiles url to users/urls.py and also in base.html to display on authentication bar.
+
+Step 4: Import decorator and call before profile view
+    from django.contrib.auth.decorators import login_required
+
+** If we access profile/ as logged out, app will throw error. 
+page is looking for user login and thus we need to route it to login url **
+
+Step 5: Add login route to app, goto settings.py and add variable
+    LOGIN_URL = 'login'
