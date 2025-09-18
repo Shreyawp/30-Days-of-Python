@@ -76,12 +76,13 @@ try:
                 print(record['name'], record['salary'])
 
             ## with clause take care of commit, if there are no exceptions
+            # commits changes that are updated in PostgreSQL
             # conn.commit()
 
 except Exception as error:
     print(error)
 finally:
-    ## cursor will close as we are using with clause
+    ## cursor will close while using with clause
     # if cur is not None:
     #     cur.close()
     ## need to manually close connections
