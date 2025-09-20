@@ -1,0 +1,62 @@
+# Added posts.json file from corey's git repo
+
+ python .\manage.py shell
+>>>  import json
+>>> from blog.models import Post
+>>> for post in posts_json:                                                             d']...     post = Post(title=post['title'], content=post['content'], author_id=post['user_id'])
+...     post.save()                                                                      ']...
+>>> exit()
+
+# Check post added to web app 
+ python .\manage.py runserver
+
+# Paginator : how it works
+>>> from django.core.paginator import Paginator
+>>> posts = ['1', '2', '3', '4', '5']
+>>> p = Paginator(posts, 2)
+>>> p.num_pages
+3
+>>> for page in p.page_range:
+...     print(page)
+... 
+1
+2
+3
+>>> p1 = p.page(1)
+>>> p1
+<Page 1 of 3>
+>>> p1.number
+1
+>>> p1.object_list
+['1', '2']
+>>> p1.has_previous()
+False
+>>> p1.has_next()    
+True
+>>> p1.next_page_number()
+2
+>>> exit()
+
+for blog/views.py, class PostListView() add the following to view 2 posts/page:
+paginate_by = 2
+
+# Verify posts on page by run server
+# goto next page using '?page=2'
+http://127.0.0.1:8000/?page=2
+
+
+# Added conditionals and loops in blog/home.html for navigating pages 
+using anchor tag with class  and href to previous and next page.
+
+# While click on usernames on homepage, url leads to nowhere.
+# Created class UserPostListView in blog/views.py 
+
+# add url to class UserPostListView in blogs/urls.py 
+
+# create new template for user_post similar to home.html, 
+# here it will show all post related to that user
+
+# replace "#" to user-posts url in other templates namely home.html and post_detail.html
+
+
+
