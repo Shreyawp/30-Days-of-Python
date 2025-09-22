@@ -1,6 +1,9 @@
-# Added posts.json file from corey's git repo
+## Add Paginator to web app ##
 
- python .\manage.py shell
+# Added posts.json file from corey's git repo
+# it contains few dummy post for app help navigate onto n bolgs per pages
+
+>>> python .\manage.py shell
 >>>  import json
 >>> from blog.models import Post
 >>> for post in posts_json:                                                             d']...     post = Post(title=post['title'], content=post['content'], author_id=post['user_id'])
@@ -37,7 +40,8 @@ True
 2
 >>> exit()
 
-for blog/views.py, class PostListView() add the following to view 2 posts/page:
+## Steps to add paginator to web app 
+Step 1: for blog/views.py, class PostListView() add the following to view 2 posts/page:
 paginate_by = 2
 
 # Verify posts on page by run server
@@ -45,18 +49,18 @@ paginate_by = 2
 http://127.0.0.1:8000/?page=2
 
 
-# Added conditionals and loops in blog/home.html for navigating pages 
+Step 2: Added conditionals and loops in blog/home.html for navigating pages 
 using anchor tag with class  and href to previous and next page.
 
-# While click on usernames on homepage, url leads to nowhere.
-# Created class UserPostListView in blog/views.py 
+Step 3: While click on usernames on homepage, url leads to nowhere.
 
-# add url to class UserPostListView in blogs/urls.py 
+STep 4: Created class UserPostListView in blog/views.py 
+     add url to class UserPostListView in blogs/urls.py 
 
-# create new template for user_post similar to home.html, 
-# here it will show all post related to that user
+Step 5: create new template for user_post similar to home.html, 
+** here it will show all post related to that user
 
-# replace "#" to user-posts url in other templates namely home.html and post_detail.html
+Step 6: replace "#" to user-posts url in other templates namely home.html and post_detail.html
 
 
 
