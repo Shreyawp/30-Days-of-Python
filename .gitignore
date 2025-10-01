@@ -4,10 +4,7 @@ venv/
 data/
 example_files/ 
 learning modules/
-26_python_for_web/django_project/media/
 
 # Files
 12_modules/tempCodeRunnerFile.py
 tempCodeRunnerFile.py
-26_python_for_web/docs/passwords
-.env
