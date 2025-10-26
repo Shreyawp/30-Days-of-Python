@@ -41,7 +41,7 @@ Step 4: Run migrate to apply database to web app
 Step 5: Open shell to run add posts
 >> python manage.py shell
     7 objects imported automatically (use -v 2 for details).
-
+*** Query set ***
 >>> from blog.models import Post
 >>> from django.contrib.auth.models import User
 >>> User.objects.all()
