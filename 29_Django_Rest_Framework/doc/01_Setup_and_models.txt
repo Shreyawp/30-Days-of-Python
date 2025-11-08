@@ -1,0 +1,69 @@
+# Create REST API app using Django Rest Framework 
+Tutorial by @BugBytes DRF playlist|https://www.youtube.com/playlist?list=PL-2EBeDYMIbSXhV8FMC1hVD32Fi6e4l2u
+
+Step 1: Create new venv and install required packages as below:
+(venv) >> pip install django
+(venv) >> pip install djangorestframework
+(venv) >> pip freeze > requirements.txt
+
+Step 2: new project and new app in that project
+(venv) >> python -m django startproject mysite
+** new folder "mysite" will be created
+(venv) >> cd mysite
+(venv) >> python manage.py startapp api
+** "api" app folder will be created
+
+Step 3: Add the "api" app to mysite/settings.py in INSTALLED_APPS.
+        Also, add new file "serializers.py" in "api"
+
+Step 4: Create class-based models in api/models.py
+class User --> blank for now
+            |-> w/ functions in_stock()
+class Product --> product_name, description, price, stock, image
+class Order --> order_id, user, created_at, status {Confirm, pending, cancelled}, products
+class OrderItem --> Order, Product, Quantity 
+                |-> w/ functions item_subtotal = product.price x Quantity
+
+Step 5: Create the database tables for new model class using django's migration functions
+(venv)mysite >> python .\manage.py makemigrations
+Migrations for 'api':
+  api\migrations\0001_initial.py
+    + Create model Product
+    + Create model User
+    + Create model Order
+    + Create model OrderItem
+    + Add field products to order
+
+(venv)mysite >> python .\manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, api, auth, contenttypes, sessio
+ns
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0001_initial... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK      
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying api.0001_initial... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK    
+  Applying sessions.0001_initial... OK
+
+** Verify above create table by right-click "db.sqlite3" > select "Open Database"
+SQLITE EXPLORER tab will open containg all the tables
+
+Step 6: Adding dummy dataset to our database
+        creating new folder management/commands and add files init.py and populate_db.py
+        to add the dataset into db, run following cmds 
+(venv)mysite >> python manage.py populate_db
+
+** Optional : To Visualise the db 
+(venv)mysite >> python .\manage.py graph_models api > models.dot
+upload the "models.dot" file to online graphviz (here user dreampuf.github.io)
