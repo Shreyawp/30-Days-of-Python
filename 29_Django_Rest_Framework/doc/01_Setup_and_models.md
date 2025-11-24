@@ -1,9 +1,13 @@
 # Create REST API app using Django Rest Framework 
 Tutorial by @BugBytes DRF playlist|https://www.youtube.com/playlist?list=PL-2EBeDYMIbSXhV8FMC1hVD32Fi6e4l2u
 
+# Web application setup and creating class-based models
+
 Step 1: Create new venv and install required packages as below:
 (venv) >> pip install django
 (venv) >> pip install djangorestframework
+(venv) >> pip install markdown       # Markdown support for the browsable API.
+(venv) >> pip install django-filter  # Filtering support
 (venv) >> pip freeze > requirements.txt
 
 Step 2: new project and new app in that project
@@ -16,6 +20,8 @@ Step 2: new project and new app in that project
 Step 3: Add the "api" app to mysite/settings.py in INSTALLED_APPS.
         Also, add new file "serializers.py" in "api"
 
+
+** models.py 
 Step 4: Create class-based models in api/models.py
 class User --> blank for now
             |-> w/ functions in_stock()
@@ -36,7 +42,7 @@ Migrations for 'api':
 
 (venv)mysite >> python .\manage.py migrate
 Operations to perform:
-  Apply all migrations: admin, api, auth, contenttypes, sessio
+  Apply all migrations: admin, api, auth, contenttypes, session
 ns
 Running migrations:
   Applying contenttypes.0001_initial... OK
@@ -68,6 +74,26 @@ Step 6: Adding dummy dataset to our database
 (venv)mysite >> python .\manage.py graph_models api > models.dot
 upload the "models.dot" file to online graphviz (here user dreampuf.github.io)
 
+
 # verify the webapp link 
 >> python manage.py runserver 
 goto the localhost from any browser
+
+*******************************************************************************
+# Glossary
+django cmds :
+startproject
+startapp
+runserver
+migrate 
+makemigrations
+
+graph_models:
+pip install django-extensions
+pip install pydot
+pip install pygraphviz
+
+add 'django-extensions' to settings.py --> INSTALLED_APPS
+
+>> python manage.py migrate
+>> python manage.py graph_models api > models.dot
