@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.urls import path, include
 
-urlpatterns = [
+urlpatterns = [    
     path("", include("api.urls")),
+    path('silk/', include('silk.urls', namespace='silk')),
 ]
