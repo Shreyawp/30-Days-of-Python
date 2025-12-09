@@ -1,7 +1,7 @@
 #### Profiling and Optimization Using django-silk
 
 About [django-silk](https://github.com/jazzband/django-silk)
-- used for profiling
+- used for profiling api
 
 Setup django-silk as per doc
 
