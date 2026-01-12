@@ -1,4 +1,4 @@
-### SearchFilter and OrderingFilter
+### 17_ SearchFilter and OrderingFilter
 
 Reference doc:
 [SearchFilter](https://www.django-rest-framework.org/api-guide/filtering/#searchfilter)
@@ -42,3 +42,29 @@ for url "/products/?ordering=-price", products are displayed in descending price
 ![alt text](media/17_order_price_dsc.PNG)
 
 Can try same for name and stock with both asc n desc order
+
+
+### 18_ Writing Filter Backends
+
+Ref doc: [Custom generic filtering backend](https://www.django-rest-framework.org/api-guide/filtering/#custom-generic-filtering)
+
+Step 1: Define class InStockFilterBackend in api/filters.py
+Here, queryset filters product that are in stock
+```
+class InStockFilterBackend(filters.BaseFilterBackend):
+    def filter_queryset(self, request, queryset, view):
+        return queryset.filter(stock__gt=0)
+```
+
+STep 2: Import and call InStockFilterBackend class in views class ProductListCreateAPIView
+
+** Testing browser endpoints:
+/products/ url return product with stock greater than 0
+![alt text](media/18_custom_filter.PNG)
+
+Now, replacing queryset.filters to 
+`return queryset.exclude(stock__gt=0)`
+will return product with 0 stock, excluding all stock greater than 0
+![alt text](media/18_custom_filter_exclude.PNG)
+
+
