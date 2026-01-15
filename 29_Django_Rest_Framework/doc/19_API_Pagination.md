@@ -53,8 +53,8 @@ If request page size exceeds the data, `max_page_size` will limit the size as gi
 
 
 #### LimitOffsetPagination
-Step 1: Import LimitOffsetPagination in viewset
-and replace pagination_class to `pagination_class = LimitOffsetPagination` and comment all later parameters. By default the offset is set to PAGE_SIZE set in settings.py
+Step 1: Import LimitOffsetPagination in views.
+and replace pagination_class to `pagination_class = LimitOffsetPagination` and comment all later attributes. By default the offset is set to PAGE_SIZE set in settings.py
 ![alt text](media/19_offset.PNG)
 
 Step 2: Change PAGE_SIZE=2, with next pages offset increments by 2 times, while response return 2 products each page.
