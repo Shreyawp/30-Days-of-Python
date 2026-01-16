@@ -2,6 +2,10 @@
 
 Ref Doc:
 [Viewsets](https://www.django-rest-framework.org/api-guide/viewsets/)
+[Routers](https://www.django-rest-framework.org/api-guide/routers/)
+
+A ViewSet class is simply a **type of class-based View, that does not provide any method handlers** such as .get() or .post(), 
+and instead **provides actions such as .list() and .create().**
 
 Step 1: Remove url paths 'orders' and 'user-orders' in "api/urls.py"
 Comment out the class OrderListAPIView and UserOrderListAPIView in "api/views.py"
@@ -14,7 +18,11 @@ class OrderViewSet(viewsets.ModelViewSet):
     permission_classes = [AllowAny]
 ```
 
-Step 3: Add Routers in urls.py and import router method after the urlpatterns
+The actions provided by the [ModelViewSet](https://www.django-rest-framework.org/api-guide/viewsets/#modelviewset) class are .list(), .retrieve(), .create(), .update(), .partial_update(), and .destroy().
+
+Rather than explicitly registering viewset in urlconf, here we register viewset with Router class that will automatically determine urlconf.
+
+Step 3: Add Routers in urls.py and import router method after the urlpatterns. Here, router.urls are appended to list of existing views.
 ```
 from rest_framework.routers import DefaultRouter
 
@@ -32,7 +40,10 @@ Step 4: The above page ask for order_id which should be auto-generated. Define f
 
 ** Verify the Order ID field is removed. Create new order and POST.
 
-Goto any particular order with url "/orders/<order id>" to view order instance. 
+[SimpleRouter](https://www.django-rest-framework.org/api-guide/routers/#simplerouter) is used, which includes standard set of actions. 
+Few are tested below.
+
+Goto any particular order with url "/orders/<order id>" to view an order instance. 
 Change status to Confirmed.
 ![alt text](media/20_order_instance.PNG)
 
