@@ -36,8 +36,8 @@ POST http://localhost:8000/api/token/ HTTP/1.1
 Content-Type: application/json
 
 {
-    "username": "admin",
-    "password": "test"
+    "username": "Jerry",
+    "password": "admintest"
 }
 
 ###
@@ -51,3 +51,15 @@ Content-Type: application/json
 {
     "refresh": "<refresh token>"
 }
+
+###
+
+GET http://localhost:8000/orders/ HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY4NjczNDE3LCJpYXQiOjE3Njg2NzMxMTcsImp0aSI6ImJiNTg0OTY0Y2VlZjQyN2NhNjYwOGFlOGYwYWZiMmQxIiwidXNlcl9pZCI6IjIifQ.r1qCk-wUpwhCkWrOUqXkz33Z2krL3uvLarW2t1a_kbA
+
+###
+
+GET http://localhost:8000/orders/144866bd-a796-4994-b752-c115878d8c67 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY4NjczNDE3LCJpYXQiOjE3Njg2NzMxMTcsImp0aSI6ImJiNTg0OTY0Y2VlZjQyN2NhNjYwOGFlOGYwYWZiMmQxIiwidXNlcl9pZCI6IjIifQ.r1qCk-wUpwhCkWrOUqXkz33Z2krL3uvLarW2t1a_kbA
+
+###

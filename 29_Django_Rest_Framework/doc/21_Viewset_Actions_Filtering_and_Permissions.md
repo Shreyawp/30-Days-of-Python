@@ -61,3 +61,46 @@ The response of both url "orders/" and "user-orders/" is now Unauthorized.
 ![alt text](media/21_orders_authentication.PNG)
 
 
+### 22: Viewset Permissions | Admin vs. Normal User
+
+Aim:
+- **Users** can ONLY view their own orders, while **Admins** can view ALL orders.
+- **Users** can ONLY update/delete their own orders, while **Admins** can update/delete ALL orders.
+
+Step 1: Add below code to class OrderViewSet
+```
+def get_queryset(self):
+        qs = super().get_queryset()
+        if not self.request.user.is_staff:
+            qs = qs.filter(user=self.request.user)
+        return qs
+
+```
+
+** Testing above code in api.http
+Access the below url with both admin and user, which returns orders asociated with user n allow admin to view all orders.
+GET http://localhost:8000/orders/ HTTP/1.1
+Authorization: Bearer <access token>
+
+
+** Since, logged with a user, cant access particular order created by another user:
+GET http://localhost:8000/orders/144866bd-a796-4994-b752-c115878d8c67 HTTP/1.1
+Authorization: Bearer <access token>
+
+>> HTTP/1.1 404 Not Found
+{
+  "detail": "No Order matches the given query."
+}
+
+
+The custom actions decorator and following function is now redundant, so we removed those lines as we can get user-orders by default as we send request to /orders endpoint.
+
+#####################################
+
+Recap what functionalities ViewSet has provided:
+- Full set of urls for all CRUD operations on order model for this django application.
+- Serialize data from DB to JSON data and to deserialize incoming request bodies from JSON data to order objects.
+- Added permission class, pagination and filters
+- Override the few method that customized functionalities and results that are shown to users ,and customise permissions and object access.
+
+
