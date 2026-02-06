@@ -10,9 +10,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from api.filters import InStockFilterBackend, OrderFilter, ProductFilter
-from api.models import Order, OrderItem, Product
+from api.models import Order, OrderItem, Product, User
 from api.serializers import (OrderSerializer, OrderCreateSerializer, ProductInfoSerializer,
-                             ProductSerializer)
+                             ProductSerializer, UserSerializer)
 
 
 class ProductListCreateAPIView(generics.ListCreateAPIView):
@@ -28,11 +28,7 @@ class ProductListCreateAPIView(generics.ListCreateAPIView):
     search_fields = ['=name', 'description']
     ordering_fields = ['name', 'price', 'stock']
     pagination_class = LimitOffsetPagination
-    # pagination_class.page_size = 2
-    # pagination_class.page_query_param = 'pagenum'
-    # pagination_class.page_size_query_param = 'size'
-    # pagination_class.max_page_size = 6
-
+    
     def get_permissions(self):
         self.permission_classes = [AllowAny]
         if self.request.method == 'POST':
@@ -98,4 +94,8 @@ class ProductInfoAPIView(APIView):
         return Response(serializer.data)
 
 
+class UserListView(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    pagination_class = None 
     
