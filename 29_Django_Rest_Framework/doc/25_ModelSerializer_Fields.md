@@ -1,6 +1,6 @@
 ### ModelSerializer Fields - Best Practices
 
-Ref: 
+Ref: [Specifying fields](https://www.django-rest-framework.org/api-guide/serializers/#specifying-which-fields-to-include)
 
 Step 1: Import User model in `serializers.py` and create class UserSerializer
 ```
