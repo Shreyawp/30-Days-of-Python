@@ -139,6 +139,21 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 2,
+    'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.AnonRateThrottle',
+        #'rest_framework.throttling.UserRateThrottle',
+        # 'api.throttles.BurstRateThrottle',
+        # 'api.throttles.SustainedRateThrottle',
+        #'rest_framework.throttling.ScopedRateThrottle',
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '2/minute',
+        #'user': '3/minute', 
+        # 'burst': '10/minute',
+        # 'sustained': '15/hour',
+        'products': '2/minute',
+        'orders': '4/minute',
+    },
 }
 
 SPECTACULAR_SETTINGS = {
@@ -147,9 +162,9 @@ SPECTACULAR_SETTINGS = {
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
 }
-
+"""
 CACHES = {
-    "default": {
+    "default": {        
         "BACKEND": "django_redis.cache.RedisCache",
         "LOCATION": "redis://127.0.0.1:6379/1",
         "OPTIONS": {
@@ -157,7 +172,7 @@ CACHES = {
         }
     }
 }
-
+"""
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
