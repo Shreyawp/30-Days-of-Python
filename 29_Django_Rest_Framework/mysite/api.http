@@ -64,7 +64,7 @@ Authorization: Bearer <access token>
 
 ###
 
-PUT http://localhost:8000/orders/b12d0250-d175-404d-9f04-975c67400f57/ HTTP/1.1
+POST http://localhost:8000/orders/ HTTP/1.1
 Content-Type: application/json
 Authorization: Bearer <access token>
 

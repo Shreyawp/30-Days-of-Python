@@ -17,6 +17,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_headers
 from rest_framework.throttling import ScopedRateThrottle
+from api.tasks import send_over_confirmation_email
 
 
 class ProductListCreateAPIView(generics.ListCreateAPIView):
@@ -78,7 +79,8 @@ class OrderViewSet(viewsets.ModelViewSet):
         return super().list(request, *args, **kwargs)
     
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        order = serializer.save(user=self.request.user)
+        send_over_confirmation_email.delay(order.order_id, self.request.user.email)
 
     def get_serializer_class(self):
         # can also check if POST method:
