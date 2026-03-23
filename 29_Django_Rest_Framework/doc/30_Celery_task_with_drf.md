@@ -70,7 +70,8 @@ class OrderViewSet(viewsets.ModelViewSet):
             send_over_confirmation_email.delay(order.order_id, self.request.user.email)
 ```
 
-Step 7: Testing by running server 
+Step 7: Testing by running server
+>> docker run --name django-redis -d -p 6379:6379 --rm redis
 >> python manage.py runserver
 
 Open new terminal to start celery
@@ -104,6 +105,7 @@ Authorization: Bearer <access token>
 It must show TASK sending email, followed by email content printed out.
 It will print msg of task with order_id is received and processed.
 
+![alt text](media/30_celery_task.PNG)
 
 
 
