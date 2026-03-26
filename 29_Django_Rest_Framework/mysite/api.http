@@ -88,3 +88,51 @@ DELETE http://localhost:8000/orders/b12d0250-d175-404d-9f04-975c67400f57/ HTTP/1
 Authorization: Bearer <access token>
 
 ###
+
+# Djoser Token Auth testing
+GET http://localhost:8000/auth/users/me/ HTTP/1.1
+Authorization: Token a34c4dd1771a76a3fed673b1fb4c5b050f3fd74a
+
+###
+POST http://localhost:8000/auth/token/login/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "test"
+}
+
+###
+POST http://localhost:8000/auth/token/logout/ HTTP/1.1
+Authorization: Token a34c4dd1771a76a3fed673b1fb4c5b050f3fd74a
+
+###
+# Djoser JWT Auth Testing
+POST http://localhost:8000/auth/jwt/create/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "test"
+}
+
+###
+GET http://localhost:8000/auth/users/me/ HTTP/1.1
+Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzc0NTI2NTk1LCJpYXQiOjE3NzQ1MjMwMDYsImp0aSI6ImU1MmUwYzFlZmQzOTRhZDRiZmE4NzA0MDc0MDJhNGZlIiwidXNlcl9pZCI6IjEifQ.-365AJ3rTDIUTUUDoG2wL8NSTbbJuBsA89x4RV5lchs
+
+###
+
+POST http://localhost:8000/auth/jwt/refresh/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3NDYxMDgwMywiaWF0IjoxNzc0NTI0NDAzLCJqdGkiOiI0NzI1MGIyNDllNTU0M2ZjOWRiNjcxZDI3N2IxYWE0MiIsInVzZXJfaWQiOiIxIn0.ZXP2mOsen-STMiks98q1l3hVduARsQGYW1RJ1BUFWgY"
+}
+###
+POST http://localhost:8000/auth/jwt/verify/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzc0NTI2NTk1LCJpYXQiOjE3NzQ1MjMwMDYsImp0aSI6ImU1MmUwYzFlZmQzOTRhZDRiZmE4NzA0MDc0MDJhNGZlIiwidXNlcl9pZCI6IjEifQ.-365AJ3rTDIUTUUDoG2wL8NSTbbJuBsA89x4RV5lchs"
+}
+###
