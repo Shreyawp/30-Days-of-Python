@@ -10,7 +10,7 @@ v24.14.1
 11.11.0
 
 Create [React environment](https://react.dev/learn/build-a-react-app-from-scratch#vite) run following cmd in root directory 
->> npm create vite@latest myapp -- --template react-ts
+>> npm create vite@latest myapp -- --template react
 
 file structure:
 29_Django_Rest_Framework/
