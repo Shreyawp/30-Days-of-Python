@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import { createContext, useState } from 'react';
 
 export const AuthContext = createContext(null);
 
@@ -7,10 +7,10 @@ export const AuthProvider = ({children}) => {
 
     const login = async (username, password) => {
         try {
-            const reponse = await fetch('http://localhost:8000/auth/token/login/', {
+            const response = await fetch('http://localhost:8000/auth/token/login/', {
                 method: "POST",
                 headers: {
-                    'Context-Type': 'application/json',
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({username, password})
             })

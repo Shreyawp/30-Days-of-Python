@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './App.css'
+import { Login } from "./components/Login"
 import { AuthProvider } from './AuthContext';
 
 function App() {
@@ -14,4 +15,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

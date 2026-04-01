@@ -67,13 +67,7 @@ found 0 vulnerabilities
 ```
 
 Step 4: Open Localhost on browser
-
-
-
-
-
-
-
+![alt text](media/32_Login_page.PNG)
 
 
 
