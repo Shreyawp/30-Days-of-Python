@@ -29,15 +29,44 @@ VITE v8.0.3  ready in 1651 ms
 Open the given link to view React + Vite default page.
 ![alt text](media/32_react_def_page.PNG)
 
+React Login endpoint:
+
+Step 1: Create AuthContext.jsx 
+  Ref: (Passing Data Deeply with Context)[https://react.dev/learn/passing-data-deeply-with-context]
+       (Context: an alternative to passing props)[https://react.dev/learn/passing-data-deeply-with-context#context-an-alternative-to-passing-props]
+
+Step 2: Create Login component and import AuthContext 
+
+Step 3: Import AuthProvider to App.jsx
+
+Step 4: Testing run 
+```
+myapp> npm i
+
+up to date, audited 152 packages in 8s
+
+36 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+```
+
+- Read package.json file -> scripts -> to run "vite" : "dev" 
+```
+> npm run dev
+
+> myapp@0.0.0 dev
+> vite
 
 
+  VITE v8.0.3  ready in 2293 ms
 
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose  
+  ➜  press h + enter to show help   
+```
 
-
-
-
-
-
+Step 4: Open Localhost on browser
 
 
 
