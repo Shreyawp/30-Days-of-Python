@@ -1,5 +1,7 @@
 ### React with djoser and DRF
 
+Ref: [React Router](https://reactrouter.com/home)
+
 Install [node.js](https://nodejs.org/en/download) on PC to run npm cmds.
 Finish installation setups with defualt options
 restart VSCode or terminal 
@@ -53,7 +55,7 @@ found 0 vulnerabilities
 
 - Read package.json file -> scripts -> to run "vite" : "dev" 
 ```
-> npm run dev
+myapp> npm run dev
 
 > myapp@0.0.0 dev
 > vite
@@ -69,15 +71,29 @@ found 0 vulnerabilities
 Step 4: Open Localhost on browser
 ![alt text](media/32_Login_page.PNG)
 
+Step 5: Adding `user/me/` page 
+
+
+Step 6: Install react-router-dom
+`npm i react-router-dom`
+
+Step 7: [Configuring Routes](https://reactrouter.com/start/declarative/routing)
+Add following to App.jsx
+`import { BrowserRouter, Routes, Route, Link } from "react-router";`
 
 
 
+** Testing links created at home page
+![alt text](media/32_create_links_on_home_page.PNG)
+
+Login page: 
+![alt text](media/32_login_link_page.PNG)
+
+Dashboard page:
+![alt text](media/32_dashboard_link_page.PNG)
 
 
-
-
-
-
-
+Step 8: Created Dashboard  welcome page 
+![alt text](media/32_dashboard.PNG)
 
 
